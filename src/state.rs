@@ -10,4 +10,6 @@ pub struct State {
     pub owner: Addr,
 }
 
-pub const STATE: Item<State> = Item::new("state");
+const STORAGE_KEY: &str = "state";
+
+pub const STATE: Item<State> = Item::new(STORAGE_KEY);
