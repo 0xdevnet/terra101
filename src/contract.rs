@@ -20,7 +20,7 @@ pub fn instantiate(
 ) -> Result<Response, ContractError> {
     let state = State {
         count: msg.count,
-        owner: info.sender.clone(),
+        owner: info.sender,
     };
     // set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
     STATE.save(deps.storage, &state)?;
@@ -37,7 +37,7 @@ pub fn execute(
 ) -> Result<Response, ContractError> {
     match msg {
         ExecuteMsg::Increment {} => try_increment(deps),
-				ExecuteMsg::Decrement {} => try_decrement(deps),
+        ExecuteMsg::Decrement {} => try_decrement(deps),
         ExecuteMsg::Reset { count } => try_reset(deps, info, count),
     }
 }
@@ -52,12 +52,12 @@ pub fn try_increment(deps: DepsMut) -> Result<Response, ContractError> {
 }
 
 pub fn try_decrement(deps: DepsMut) -> Result<Response, ContractError> {
-	STATE.update(deps.storage, |mut state| -> Result<_, ContractError> {
-			state.count -= 1;
-			Ok(state)
-	})?;
+    STATE.update(deps.storage, |mut state| -> Result<_, ContractError> {
+        state.count -= 1;
+        Ok(state)
+    })?;
 
-	Ok(Response::new().add_attribute("method", "try_derement"))
+    Ok(Response::new().add_attribute("method", "try_derement"))
 }
 
 pub fn try_reset(deps: DepsMut, info: MessageInfo, count: i32) -> Result<Response, ContractError> {
@@ -125,7 +125,7 @@ mod tests {
         assert_eq!(18, value.count);
     }
 
-		#[test]
+    #[test]
     fn decrement() {
         let mut deps = mock_dependencies(&coins(2, "token"));
 
