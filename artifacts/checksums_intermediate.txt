@@ -1,0 +1,1 @@
+5fab5f03c5697b3b7f89b3ef31d63de5906b8450c4b9b65ab3b15d3c29a2e445  ./target/wasm32-unknown-unknown/release/terra101.wasm
